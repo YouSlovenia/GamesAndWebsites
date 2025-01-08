@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory Incremental v1.0.0.0</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e2f;
+            color: #e8e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff6f61;
+        }
+        header p {
+            font-size: 1rem;
+            color: #a9a9b3;
+        }
+        #game-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background: #28293d;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .stat {
+            flex: 1;
+            text-align: center;
+        }
+        .stat h3 {
+            font-size: 1.2rem;
+            color: #ffcb6b;
+        }
+        .stat p {
+            font-size: 1rem;
+            color: #f1f1f3;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            background: #4caf50;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c6c7a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Theory Incremental</h1>
+        <p>Version: v1.0.0.0 - Ultimate Huge Update</p>
+    </header>
+    <div id="game-container">
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <h3>Theory Points</h3>
+                <p id="theory-points">0</p>
+            </div>
+            <div class="stat">
+                <h3>Per Click</h3>
+                <p id="per-click">1</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button" id="increment-button">Generate Theory</div>
+        <div class="button" id="upgrade-button">Upgrade (Cost: <span id="upgrade-cost">10</span>)</div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Theory Incremental Game. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Game Variables
+        let theoryPoints = 0;
+        let perClick = 1;
+        let upgradeCost = 10;
+
+        // DOM Elements
+        const theoryPointsElement = document.getElementById('theory-points');
+        const perClickElement = document.getElementById('per-click');
+        const upgradeCostElement = document.getElementById('upgrade-cost');
+
+        // Increment Theory Points
+        document.getElementById('increment-button').addEventListener('click', () => {
+            theoryPoints += perClick;
+            updateUI();
+        });
+
+        // Upgrade Button
+        document.getElementById('upgrade-button').addEventListener('click', () => {
+            if (theoryPoints >= upgradeCost) {
+                theoryPoints -= upgradeCost;
+                perClick += 1;
+                upgradeCost = Math.ceil(upgradeCost * 1.5);
+                updateUI();
+            } else {
+                alert("Not enough Theory Points!");
+            }
+        });
+
+        // Update UI
+        function updateUI() {
+            theoryPointsElement.textContent = theoryPoints;
+            perClickElement.textContent = perClick;
+            upgradeCostElement.textContent = upgradeCost;
+        }
+    </script>
+</body>
+</html>
